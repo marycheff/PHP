@@ -20,7 +20,8 @@
                             <div class="carousel-inner">
                                 @foreach($products as $product)
                                     <div class="carousel-item {{ $loop->index == 0 ? 'active' : '' }}">
-                                        <img src="{{ $product->path_product }}" class="d-block w-100" alt="...">
+                                        <img src="{{ $product->path_product }}" class="d-block w-100" alt="{{$product->name_product}}">
+
                                     </div>
                                 @endforeach
                             </div>

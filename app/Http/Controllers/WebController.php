@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class WebController extends Controller
 {
@@ -21,12 +22,31 @@ class WebController extends Controller
     }
 
 
+
     public function products() {
-        return view('products'); // товары страница
+        $products = DB::table('products')
+            ->where('count_product', '>', 0)
+            ->orderByDesc('id_product') // сортировка по убыванию
+            ->get(); // или написать на SQL: DB::select("SELECT * FROM `products` WHERE count_product > 0 ORDER BY id_product DESC LIMIT 5")
+
+        return view('products', [
+            'products' => $products
+        ]);
     }
 
     public function product($id) {
-        return view('product'); // товар страница
+        $product = DB::table('products')
+            ->where('id_product', $id)
+            ->first();
+
+        if ($product) {
+            return view('product', [
+                'product' => $product
+            ]);
+        } else {
+
+            abort(404);
+        }
     }
 
     public function admin() {
