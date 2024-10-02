@@ -1,0 +1,8 @@
+@font-face {
+        font-family: Aegean;
+        src: url("/assets/fonts/Aegean-8jJ2.ttf");
+}
+
+body{
+    font-family: Aegean;
+}
